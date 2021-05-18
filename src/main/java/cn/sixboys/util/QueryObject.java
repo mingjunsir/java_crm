@@ -19,6 +19,7 @@ public class QueryObject {
     private String keyword;
     private Long deptId;
     private Long employeeId;
+    private Long dictionaryId;
     private Integer status;
     @DateTimeFormat(value = "yyyy-MM-dd")
     private Date startTime;
