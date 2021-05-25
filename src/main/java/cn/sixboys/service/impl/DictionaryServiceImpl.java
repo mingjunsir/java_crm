@@ -1,6 +1,5 @@
 package cn.sixboys.service.impl;
 
-import cn.sixboys.domain.Department;
 import cn.sixboys.domain.Dictionary;
 import cn.sixboys.mapper.DictionaryMapper;
 import cn.sixboys.service.IDictionaryService;
@@ -11,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+
+/**
+ * 字典目录实现类
+ * @author FuqiangWu
+ */
 
 @Service
 public class DictionaryServiceImpl implements IDictionaryService {

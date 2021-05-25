@@ -73,7 +73,7 @@
     <select id="queryForList" resultMap="baseResultMap">
         select c.id,c.name,c.age,c.gender,c.tel,c.qq,c.jobId,c.sourceId,c.sellerId,c.inputUserId,c.inputTime,c.status,c.positiveTime,
         e.id as e_id,e.name as e_name
-        from customer as c inner join employee as e on c.inputUserId=e.id
+        from customer as c inner join employee as e on c.sellerId=e.id
         <where>
             <if test="keyword != null and keyword != ''">
                 (c.name like concat('%',#{keyword},'%') or c.tel like concat('%',#{keyword},'%'))
@@ -94,5 +94,57 @@
                 and status = #{status}
             </if>
         </where>
+    </select>
+    <update id="updateStatus">
+        update customer set status=#{status} where id=#{id}
+    </update>
+    <update id="updateSeller">
+        update customer
+        <set>
+            <if test="sellerId != ''">
+                sellerId = #{sellerId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <resultMap id="statementMap" type="cn.sixboys.domain.Statement">
+        <result property="num" column="num"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="selectStatement" resultMap="statementMap">
+        select count(*) num,
+        <if test="groupType == 1">
+            year(inputTime) type
+        </if>
+        <if test="groupType == 2">
+            DATE_FORMAT(inputTime,'%Y-%m') type
+        </if>
+        <if test="groupType == 3">
+            DATE(inputTime) type
+        </if>
+        <if test="groupType == 4">
+            e.name type
+        </if>
+        from customer as c inner join employee as e on c.inputUserId=e.id
+        <where>
+            status=0
+            <if test="startTime != null and endTime != null">
+                and inputTime between #{startTime} and #{endTime}
+            </if>
+        </where>
+        <if test="groupType == 1">
+            GROUP BY year(inputTime)
+        </if>
+        <if test="groupType == 2">
+            GROUP BY DATE_FORMAT(inputTime,'%Y-%m')
+        </if>
+        <if test="groupType == 3">
+            GROUP BY DATE(inputTime)
+        </if>
+        <if test="groupType == 4">
+            GROUP BY inputUserId
+        </if>
     </select>
 </mapper>

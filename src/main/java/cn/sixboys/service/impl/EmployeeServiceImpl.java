@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * 员工管理实现类
  * @author mingjuntang
  * @Data 2021/5/9 14:45
  */
@@ -18,6 +19,19 @@ import java.util.List;
 public class EmployeeServiceImpl implements IEmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Override
+    public Employee login(Employee employee) {
+        Employee employee1 = employeeMapper.queryEmployeeByUsernameAndPassword(employee);
+        if(employee1 == null) {
+            // 登陆失败
+            return null;
+        } else {
+            // 登陆成功， 返回json数据
+            return employee1;
+        }
+    }
+
     @Override
     public PageResult<Employee> selectEmployee(QueryObject queryObject) {
         List<Employee> employees = employeeMapper.queryForList(queryObject);
@@ -60,6 +74,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public List<Employee> selectAll(Employee employee) {
         List<Employee> employees = employeeMapper.selectAll(employee);
+        return employees;
+    }
+
+    @Override
+    public List<Employee> selectSeller(Employee employee) {
+        List<Employee> employees = employeeMapper.selectSeller(employee);
         return employees;
     }
 }

@@ -20,17 +20,17 @@
         <result column="e_id" property="employee.id"/>
         <result column="e_name" property="employee.name"/>
     </resultMap>
-    <select id="queryForCount" resultMap="baseResultMap">
+    <select id="queryForList" resultMap="baseResultMap">
         select t.id,t.customerId,t.transUser,t.transTime,t.oldSeller,t.newSellerId,t.transReason,c.id as c_id,c.name as c_name,
-               e.id as e_id,e.name as e_name
+        e.id as e_id,e.name as e_name
         from transRecord as t inner join customer as c on t.customerId=c.id
         inner join employee as e on e.id=t.newSellerId
         <where>
             <if test="keyword != null and keyword != ''">
                 c.name like concat('%',#{keyword},'%')
             </if>
-            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-                and (t.traceTime between #{startTime} and #{endTime})
+            <if test="startTime != null and endTime != null">
+                and (t.transTime between #{startTime} and #{endTime})
             </if>
         </where>
         LIMIT #{start}, #{pageSize}
@@ -39,10 +39,10 @@
         select count(*) from transRecord
         <where>
             <if test="keyword != null and keyword != ''">
-                c.name like concat('%',#{keyword},'%')
+                name like concat('%',#{keyword},'%')
             </if>
-            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-                and (t.traceTime between #{startTime} and #{endTime})
+            <if test="startTime != null and endTime != null">
+                and (transTime between #{startTime} and #{endTime})
             </if>
         </where>
     </select>

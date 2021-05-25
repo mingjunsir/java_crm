@@ -1,6 +1,7 @@
 package cn.sixboys.util;
 
 import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,10 +23,13 @@ public class QueryObject {
     private Long dictionaryId;
     private Integer status;
     @DateTimeFormat(value = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     private Date startTime;
     @DateTimeFormat(value = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     private Date endTime;
     private Integer type;
+    private Integer groupType;
     private int currentPage = 1; // 当前页码，要跳转到哪一页的页码（需要给默认值）
     private int pageSize = 4; // 每页显示条数（需要给默认值）
     public int start = 0;

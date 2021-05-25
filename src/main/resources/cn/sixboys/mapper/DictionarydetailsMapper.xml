@@ -68,7 +68,11 @@
     <!--查询总条数-->
     <select id="queryForCount" resultType="int">
         select count(*) from dictionarydetails
-
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (title like concat('%',#{keyword},'%') or sequence like concat('%',#{keyword},'%'))
+            </if>
+        </where>
     </select>
 
     <!--    查询当前页显示条数-->

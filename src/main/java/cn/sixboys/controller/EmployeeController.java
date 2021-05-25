@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 员工管理接口
  * @author mingjuntang
  * @Data 2021/5/9 14:47
  */
@@ -99,6 +100,13 @@ public class EmployeeController {
     @ResponseBody
     public JsonResult selectAll(Employee employee){
         List<Employee> employees = employeeService.selectAll(employee);
+        return new JsonResult(true,"查询成功",employees);
+    }
+
+    @RequestMapping("/selectSeller")
+    @ResponseBody
+    public JsonResult selectSeller(Employee employee){
+        List<Employee> employees = employeeService.selectSeller(employee);
         return new JsonResult(true,"查询成功",employees);
     }
 }

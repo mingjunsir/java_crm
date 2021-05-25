@@ -2,6 +2,7 @@ package cn.sixboys.controller;
 
 import cn.sixboys.domain.Customer;
 import cn.sixboys.domain.JsonResult;
+import cn.sixboys.domain.Statement;
 import cn.sixboys.service.ICustomerService;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 /**
+ * 客户管理接口
  * @author mingjuntang
  * @Data 2021/5/15 17:49
  */
@@ -32,7 +36,6 @@ public class CustomerController {
         if(pageSize ==null ) {
             pageSize = 4;
         }
-
         QueryObject queryObject = new QueryObject();
         queryObject.setCurrentPage(currentPage);
         queryObject.setPageSize(pageSize);
@@ -59,5 +62,32 @@ public class CustomerController {
     public JsonResult update(Customer customer){
         customerService.update(customer);
         return new JsonResult(true,"更新成功");
+    }
+
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public JsonResult updateStatus(Customer customer){
+        customerService.updateStatus(customer);
+        return new JsonResult(true,"更新成功");
+    }
+
+    @RequestMapping("/selectStatement")
+    @ResponseBody
+    public JsonResult selectStatement(String startTime,String endTime, Integer type){
+        QueryObject queryObject = new QueryObject();
+        queryObject.setGroupType(type);
+        if (startTime != null && endTime != null){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date st = simpleDateFormat.parse(startTime);
+                Date et = simpleDateFormat.parse(endTime);
+                queryObject.setStartTime(st);
+                queryObject.setEndTime(et);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        List<Statement> statementList = customerService.selectStatement(queryObject);
+        return new JsonResult(true,"更新成功",statementList);
     }
 }

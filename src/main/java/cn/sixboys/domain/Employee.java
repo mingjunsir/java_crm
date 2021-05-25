@@ -2,6 +2,7 @@ package cn.sixboys.domain;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +27,7 @@ public class Employee {
     private Integer age;
     private Long deptId;
     @DateTimeFormat(value = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     private Date hireDate;
     private Integer state;
     private Integer admin;

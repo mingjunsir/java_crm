@@ -1,13 +1,13 @@
 package cn.sixboys.mapper;
 
-import cn.sixboys.domain.Dictionary;
 import cn.sixboys.domain.Dictionarydetails;
 import cn.sixboys.util.QueryObject;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
+/**
+ * 字典明细Mapper
+ */
 public interface DictionarydetailsMapper {
 
     List<Dictionarydetails>selectAll(Dictionarydetails dictionarydetails);

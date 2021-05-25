@@ -1,6 +1,7 @@
 package cn.sixboys.domain;
 
 import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class TraceRecord {
     private Long id;
     @DateTimeFormat(value = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date traceTime;
     private String traceDetails;
     private Long traceTypeId;

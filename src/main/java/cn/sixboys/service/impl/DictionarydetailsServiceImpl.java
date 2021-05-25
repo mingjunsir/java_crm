@@ -1,8 +1,6 @@
 package cn.sixboys.service.impl;
 
-import cn.sixboys.domain.Dictionary;
 import cn.sixboys.domain.Dictionarydetails;
-import cn.sixboys.mapper.DictionaryMapper;
 import cn.sixboys.mapper.DictionarydetailsMapper;
 import cn.sixboys.service.IDictionarydetailsService;
 import cn.sixboys.util.PageResult;
@@ -12,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+
+/**
+ * 字典明细实现类
+ * @Data 2021/5/15 17:47
+ */
+
 @Service
 public class DictionarydetailsServiceImpl implements IDictionarydetailsService {
     @Autowired

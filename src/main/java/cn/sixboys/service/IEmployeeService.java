@@ -13,6 +13,8 @@ import java.util.List;
  * @Data 2021/5/9 14:44
  */
 public interface IEmployeeService {
+    Employee login(Employee user);
+
     PageResult<Employee> selectEmployee(QueryObject queryObject);
     void deleteEmployee(Long id);
     void insertEmployee(Employee employee);
@@ -21,4 +23,5 @@ public interface IEmployeeService {
     void deleteEmployees(int[] ids);
     void addEmployees(List<Employee> employees);
     List<Employee> selectAll(Employee employee);
+    List<Employee> selectSeller(Employee employee);
 }

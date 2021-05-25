@@ -17,13 +17,13 @@
         <result column="c_name" property="customer.name"/>
     </resultMap>
     <select id="queryForList" resultMap="baseResultMap">
-        select t.id,t.traceTime,t.traceDetails,t.traceResult,t.remarks,t.customerId,t.inputUserId,t.type,c.id as c_id,c.name as c_name
+        select t.id,t.traceTime,t.traceDetails,t.traceTypeId,t.traceResult,t.remarks,t.customerId,t.inputUserId,t.type,c.id as c_id,c.name as c_name
         from traceRecord as t inner join customer as c on t.customerId=c.id
         <where>
             <if test="keyword != null and keyword != ''">
                 c.name like concat('%',#{keyword},'%')
             </if>
-            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            <if test="startTime != null and endTime != null">
                 and (t.traceTime between #{startTime} and #{endTime})
             </if>
             <if test="type != null">
@@ -33,16 +33,17 @@
         LIMIT #{start}, #{pageSize}
     </select>
     <select id="queryForCount" resultType="int">
-        select count(*) from traceRecord
+        select COUNT(*)
+        from traceRecord as t inner join customer as c on t.customerId=c.id
         <where>
             <if test="keyword != null and keyword != ''">
                 c.name like concat('%',#{keyword},'%')
             </if>
-            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            <if test="startTime != null and endTime != null">
                 and (t.traceTime between #{startTime} and #{endTime})
             </if>
             <if test="type != null">
-                and t.type = #{type}
+                and type = #{type}
             </if>
         </where>
     </select>

@@ -3,7 +3,6 @@ package cn.sixboys.domain;
 /**
  * 部门管理实体
  * @author FuqiangWu
- *
  */
 public class Department {
     private Long id;

@@ -1,6 +1,7 @@
 package cn.sixboys.service;
 
 import cn.sixboys.domain.Customer;
+import cn.sixboys.domain.Statement;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 
@@ -24,5 +25,7 @@ public interface ICustomerService {
      * @param customer
      */
     void update(Customer customer);
-
+    void updateStatus(Customer customer);
+    void updateSeller(Customer customer);
+    List<Statement> selectStatement(QueryObject queryObject);
 }

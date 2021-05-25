@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 跟进记录实体类
  * @author mingjuntang
  * @Data 2021/5/15 21:04
  */

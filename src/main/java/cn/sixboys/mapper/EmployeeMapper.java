@@ -1,14 +1,12 @@
 package cn.sixboys.mapper;
 
 import cn.sixboys.domain.Employee;
-import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
-import org.apache.ibatis.annotations.Param;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 /**
+ * 员工管理Mapper
  * @author mingjuntang
  * @Data 2021/5/9 14:42
  */
@@ -38,7 +36,20 @@ public interface EmployeeMapper {
      */
     void deleteEmployees(int[] ids);
 
+    /**
+     * 批量增加
+     * @param employees
+     */
     void addEmployees(List<Employee> employees);
 
+    /**
+     * 查询所有员工
+     * @param employee
+     * @return
+     */
     List<Employee> selectAll(Employee employee);
+
+    List<Employee> selectSeller(Employee employee);
+
+    Employee queryEmployeeByUsernameAndPassword(Employee employee);
 }
